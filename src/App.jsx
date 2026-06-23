@@ -129,7 +129,6 @@ function generateHTML(data) {
         <div class="info-item"><div class="info-label">Marca o empresa</div><div class="info-value">${data.marca}</div></div>
         <div class="info-item"><div class="info-label">Industria</div><div class="info-value">${data.industria}</div></div>
         <div class="info-item"><div class="info-label">Tema central</div><div class="info-value">${data.tema}</div></div>
-        <div class="info-item"><div class="info-label">Motor de IA usado</div><div class="info-value">${data.motor || "—"}</div></div>
       </div>
     </div>
     <div class="section">
@@ -159,7 +158,7 @@ export default function App() {
   const [phase, setPhase] = useState("before");
   const [step, setStep] = useState(0);
   const [data, setData] = useState({
-    marca: "", industria: "", tema: "", motor: "",
+    marca: "", industria: "", tema: "",
     prompts: { descubrimiento: ["", "", ""], evaluacion: ["", "", ""], decision: ["", "", ""] },
     hallazgos: { descubrimiento: [{}, {}, {}], evaluacion: [{}, {}, {}], decision: [{}, {}, {}] },
     prioridades: [
@@ -204,7 +203,7 @@ export default function App() {
   const reset = () => {
     setPhase("before"); setStep(0);
     setData({
-      marca: "", industria: "", tema: "", motor: "",
+      marca: "", industria: "", tema: "",
       prompts: { descubrimiento: ["", "", ""], evaluacion: ["", "", ""], decision: ["", "", ""] },
       hallazgos: { descubrimiento: [{}, {}, {}], evaluacion: [{}, {}, {}], decision: [{}, {}, {}] },
       prioridades: [{ prompt: "", etapa: "", impacto: "", accion: "" }, { prompt: "", etapa: "", impacto: "", accion: "" }, { prompt: "", etapa: "", impacto: "", accion: "" }],
@@ -242,6 +241,9 @@ export default function App() {
             Nueva investigación
           </button>
         </div>
+        <p style={{ marginTop: 12, fontSize: 12, color: COLORS.slate, textAlign: "center" }}>
+          Se descarga como HTML — ábrelo en tu navegador e imprímelo como PDF.
+        </p>
       </div>
     </div>
   );
@@ -286,7 +288,6 @@ export default function App() {
                   { field: "marca", label: "Nombre de tu marca o empresa *", placeholder: "ej: HubSpot, Mi Startup, Agencia XYZ" },
                   { field: "industria", label: "Industria *", placeholder: "ej: Software B2B, E-commerce, Salud" },
                   { field: "tema", label: "Tema central de esta investigación *", placeholder: "ej: gestión de proyectos, marketing de contenidos, incorporación de clientes" },
-                  { field: "motor", label: "Motor de IA que vas a usar", placeholder: "ej: ChatGPT, Gemini, Perplexity" },
                 ].map(f => (
                   <div key={f.field} style={{ marginBottom: 16 }}>
                     <label style={{ fontSize: 13, fontWeight: 700, color: COLORS.slate, display: "block", marginBottom: 5 }}>{f.label}</label>
@@ -304,7 +305,7 @@ export default function App() {
                   Escribe al menos un prompt por etapa del recorrido del cliente. Redáctalos como los formularía una persona real — en lenguaje natural, con contexto.
                 </p>
                 <div style={{ background: COLORS.light, borderRadius: 8, padding: "10px 14px", marginBottom: 20, fontSize: 13, color: COLORS.slate }}>
-                  💡 Escribe al menos <strong>3 prompts en total</strong> para continuar. Cuando termines, ábrelos en tu motor de IA preferido y regresa aquí para registrar los resultados.
+                  💡 Escribe al menos <strong>3 prompts en total</strong> para continuar. Cuando termines, pruébalos en ChatGPT, Gemini o Perplexity — la idea es aparecer en todos — y regresa aquí para registrar los resultados.
                 </div>
                 {etapas.map(etapa => (
                   <div key={etapa.id} style={{ marginBottom: 22 }}>
